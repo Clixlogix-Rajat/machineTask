@@ -32,6 +32,7 @@ const ListingPage = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [flatlistData, setFlatlistData] = useState([]);
+  const [searchFilterList, setSearchFilterList] = useState([]);
   const [filter, setFilter] = useState(false);
   const [filterVisible, setFilterVisible] = useState(false);
 
@@ -94,10 +95,11 @@ const ListingPage = () => {
       setFilterVisible(true);
       const filteredResult = filteredData.filter((item, index) => { return item.slug.includes(txt.toLowerCase()) });
       setFlatlistData(filteredResult);
+      setSearchFilterList(filteredResult);
     } else {
       setFlatlistData(filteredData);
       setFilterVisible(false);
-
+      setSearchFilterList(filteredData);
     }
   }
 
@@ -169,10 +171,10 @@ const ListingPage = () => {
     );
   };
 
+  // filterng featured and non featured data after search complete
   const filterSearch = () => {
     setFilter(!filter);
-    setFlatlistData(filteredData);
-    const featuredList = flatlistData.filter((item, index) => {
+    const featuredList = searchFilterList.filter((item, index) => {
       return (item.featured == !filter)
     });
     setFlatlistData(featuredList);
