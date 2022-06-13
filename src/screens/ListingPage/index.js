@@ -269,6 +269,7 @@ const styles = StyleSheet.create({
   },
   flatlist: {
     width: "100%",
+    marginBottom: Platform.OS == 'android'? 40: 0,
   },
   categoryHeader: {
     flexDirection: "row",
